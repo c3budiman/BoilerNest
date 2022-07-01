@@ -25,7 +25,7 @@ jobs:
         script: |
           cd /project/FindingAssesmentApi
           git pull
-          sudo npm install
+          npm install
           npm run build
           pm2 restart assesment
           git stash
