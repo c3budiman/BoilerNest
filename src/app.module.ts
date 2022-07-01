@@ -11,6 +11,8 @@ import { UsersModule } from './users/users.module';
 import { SequelizeExceptionFilter } from './common/filters/sequelize-exception.filter';
 import { Role } from './roles/models/roles.models';
 import { User } from './users/models/user.model';
+import { FindingsModule } from './findings/findings.module';
+import { AsessmentSessionModule } from './asesmentSessions/asessmentSessions.module';
 
 @Module({
   imports: [
@@ -42,22 +44,26 @@ import { User } from './users/models/user.model';
     }),
     SequelizeModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        dialect: configService.get('DATABASE_DIALECT'),
-        host: configService.get('DATABASE_HOST'),
-        port: +configService.get('DATABASE_PORT'),
-        username: configService.get('DATABASE_USERNAME'),
-        password: configService.get('DATABASE_PASSWORD'),
-        database: configService.get('DATABASE_NAME'),
-        autoLoadModels: true,
-        synchronize: true,
-        models: [Role, User],
-      }),
+      useFactory: async (configService: ConfigService) => {
+        return {
+          dialect: configService.get('DATABASE_DIALECT'),
+          host: configService.get('DATABASE_HOST'),
+          port: +configService.get('DATABASE_PORT'),
+          username: configService.get('DATABASE_USERNAME'),
+          password: configService.get('DATABASE_PASSWORD'),
+          database: configService.get('DATABASE_NAME'),
+          autoLoadModels: true,
+          synchronize: true,
+          models: [Role, User],
+        };
+      },
       inject: [ConfigService],
     }),
     RolesModule,
     AuthModule,
     UsersModule,
+    FindingsModule,
+    AsessmentSessionModule,
   ],
   controllers: [AppController],
   providers: [

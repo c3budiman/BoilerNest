@@ -21,9 +21,9 @@ async function bootstrap() {
   });
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   const config = new DocumentBuilder()
-    .setTitle('SIS')
-    .setDescription('The SIS API description')
-    .setVersion('1.0')
+    .setTitle('Assesment Findings')
+    .setDescription('The Finding assesment api description')
+    .setVersion('0.7')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
