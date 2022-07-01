@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 export class CreateAssesmentSessions {
   @ApiProperty({
@@ -13,3 +14,5 @@ export class CreateAssesmentSessions {
   @IsNotEmpty()
   githubMain: string;
 }
+
+export class AssesmentList extends PaginationDto {}
