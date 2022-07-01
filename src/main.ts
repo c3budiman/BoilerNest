@@ -24,6 +24,7 @@ async function bootstrap() {
     .setTitle('Assesment Findings')
     .setDescription('The Finding assesment api description')
     .setVersion('0.7')
+    .setExternalDoc('Postman Collection', '/api-json')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
