@@ -62,6 +62,12 @@ export class FindingsList extends PaginationDto {
   @IsOptional()
   @IsEnum(SeverityStatus, { each: true })
   severity?: string[];
+  @ApiPropertyOptional({
+    description: 'Sessions ID',
+  })
+  @IsUUID()
+  @IsOptional()
+  sessionsId: string;
 }
 
 export class UpdateFindings extends CreateFindings {
