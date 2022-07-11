@@ -5,18 +5,17 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ValidationError } from 'sequelize';
+import { Error } from 'sequelize';
 
-@Catch(ValidationError)
+@Catch(Error)
 export class SequelizeExceptionFilter implements ExceptionFilter {
-  catch(exception: ValidationError, host: ArgumentsHost) {
+  catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    const { errors } = exception;
 
     response.status(HttpStatus.BAD_REQUEST).json({
       statusCode: HttpStatus.BAD_REQUEST,
-      message: errors.map((e) => e.message),
+      message: exception.message,
       error: 'Bad Request',
     });
   }
