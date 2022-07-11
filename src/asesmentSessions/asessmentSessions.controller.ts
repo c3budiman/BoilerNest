@@ -15,8 +15,8 @@ import {
   CreateAssesmentSessions,
 } from './dto/assesmentSession.dto';
 
-@ApiTags('assesment sessions')
-@Controller('assesmentSessions')
+@ApiTags('assesment-sessions')
+@Controller('assesment-sessions')
 export class AssesmentSessionsController {
   constructor(private readonly assesmentService: AsessmentSessionsService) {}
 

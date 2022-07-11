@@ -13,6 +13,7 @@ import { Role } from './roles/models/roles.models';
 import { User } from './users/models/user.model';
 import { FindingsModule } from './findings/findings.module';
 import { AsessmentSessionModule } from './asesmentSessions/asessmentSessions.module';
+import { StatusFindingModule } from './statusFinding/statusFinding.module';
 
 @Module({
   imports: [
@@ -64,6 +65,7 @@ import { AsessmentSessionModule } from './asesmentSessions/asessmentSessions.mod
     UsersModule,
     FindingsModule,
     AsessmentSessionModule,
+    StatusFindingModule,
   ],
   controllers: [AppController],
   providers: [

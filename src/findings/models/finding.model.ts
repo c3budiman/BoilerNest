@@ -8,6 +8,7 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
+import { StatusFinding } from 'src/statusFinding/models/statusFinding.model';
 import { AssementSessions } from '../../asesmentSessions/models/asessmentSessions.models';
 
 @Table({
@@ -24,7 +25,7 @@ export class Finding extends Model {
   @Column
   githubPath: string;
 
-  @Column
+  @Column(DataType.TEXT)
   message: string;
 
   @Column
@@ -52,4 +53,11 @@ export class Finding extends Model {
 
   @BelongsTo(() => AssementSessions, 'sessionsId')
   session: AssementSessions;
+
+  @ForeignKey(() => StatusFinding)
+  @Column(DataType.UUID)
+  idStatus: string;
+
+  @BelongsTo(() => StatusFinding, 'idStatus')
+  status: StatusFinding;
 }

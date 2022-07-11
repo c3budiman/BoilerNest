@@ -52,6 +52,13 @@ export class CreateFindings {
   @IsUUID()
   @IsNotEmpty()
   sessionsId: string;
+
+  @ApiProperty({
+    description: 'ID Status',
+  })
+  @IsUUID()
+  @IsNotEmpty()
+  idStatus: string;
 }
 
 export class FindingsList extends PaginationDto {
@@ -68,6 +75,13 @@ export class FindingsList extends PaginationDto {
   @IsUUID()
   @IsOptional()
   sessionsId: string;
+
+  @ApiPropertyOptional({
+    description: 'ID Status',
+  })
+  @IsUUID()
+  @IsOptional()
+  idStatus: string;
 }
 
 export class UpdateFindings extends CreateFindings {

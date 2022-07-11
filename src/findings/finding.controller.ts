@@ -48,7 +48,8 @@ export class FindingsController {
             "references": "",
             "severity": "",
             "isFalsePositive": "",
-            "assesmentWord": ""
+            "assesmentWord": "",
+            "idStatus": "",
             "sessionsId": ""
         }
     ]
@@ -76,7 +77,7 @@ export class FindingsController {
   }
 
   @ApiOperation({
-    summary: 'list user',
+    summary: 'List All Findings',
   })
   @ApiBearerAuth()
   @ApiOkResponse({ description: 'The request has succeeded' })
@@ -94,7 +95,7 @@ export class FindingsController {
       limit,
       offset,
       order,
-      include: ['session'],
+      include: ['session', 'status'],
     });
 
     return {
