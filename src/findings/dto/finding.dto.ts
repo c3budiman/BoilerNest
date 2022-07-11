@@ -109,4 +109,11 @@ export class UpdateFindings extends CreateFindings {
   })
   @IsOptional()
   assesmentWord: string;
+
+  @ApiPropertyOptional({
+    description: 'ID Status',
+  })
+  @IsUUID()
+  @IsOptional()
+  idStatus: string;
 }
