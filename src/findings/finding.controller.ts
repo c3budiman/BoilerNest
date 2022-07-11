@@ -26,6 +26,7 @@ import { ResponseDto } from 'src/common/dto/response.dto';
 import {
   CreateFindings,
   FindingsList,
+  FindingSummary,
   UpdateFindings,
 } from './dto/finding.dto';
 import { FindingsService } from './finding.service';
@@ -101,6 +102,24 @@ export class FindingsController {
     return {
       statusCode: HttpStatus.OK,
       data,
+    };
+  }
+
+  @ApiOperation({
+    summary: 'Severity Summary',
+  })
+  @ApiBearerAuth()
+  @ApiOkResponse({ description: 'The request has succeeded' })
+  @ApiBadRequestResponse({ description: 'The request was invalid' })
+  @ApiNotFoundResponse({ description: 'The request was not found' })
+  @ApiInternalServerErrorResponse({ description: 'Internal Server Error' })
+  @Get('summary')
+  async getSummary(@Query() query: FindingSummary): Promise<ResponseDto> {
+    const { sessionsId, idStatus } = query;
+    const summary = await this.findingService.getSummary(sessionsId, idStatus);
+    return {
+      statusCode: HttpStatus.OK,
+      data: summary ?? [],
     };
   }
 

@@ -26,6 +26,33 @@ export class FindingsService implements IGenericService<Finding> {
     return this.model.scope(scopes ?? 'defaultScope').findAndCountAll(options);
   }
 
+  async getSummary(
+    sessionId: string,
+    idStatus: string | undefined,
+    scopes?: Array<string>,
+  ) {
+    const queryIdStatus = idStatus ? `AND id_status = $2` : ``;
+    return this.model.scope(scopes ?? 'defaultScope').sequelize.query(
+      `
+        SELECT
+          severity,
+          count( severity ) AS count_severity 
+        FROM
+          findings 
+        WHERE
+          sessions_id = $1
+          AND is_false_positive = 0
+          ${queryIdStatus}
+        GROUP BY
+          severity
+      `,
+      {
+        type: 'SELECT',
+        bind: [sessionId, idStatus],
+      },
+    );
+  }
+
   async create(
     values: Partial<Finding>,
     scopes?: Array<string>,

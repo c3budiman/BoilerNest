@@ -117,3 +117,19 @@ export class UpdateFindings extends CreateFindings {
   @IsOptional()
   idStatus: string;
 }
+
+export class FindingSummary {
+  @ApiProperty({
+    description: 'Sessions ID',
+  })
+  @IsUUID()
+  @IsNotEmpty()
+  sessionsId: string;
+
+  @ApiPropertyOptional({
+    description: 'ID Status',
+  })
+  @IsUUID()
+  @IsOptional()
+  idStatus: string;
+}
