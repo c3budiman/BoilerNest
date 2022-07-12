@@ -1,4 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsOptional, IsUUID, IsEnum } from 'class-validator';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 
@@ -65,9 +66,11 @@ export class FindingsList extends PaginationDto {
   @ApiPropertyOptional({
     description: 'Severity Status',
     enum: SeverityStatus,
+    isArray: true,
   })
   @IsOptional()
   @IsEnum(SeverityStatus, { each: true })
+  @Transform((e) => (Array.isArray(e.value) ? e.value : [e.value]))
   severity?: string[];
   @ApiPropertyOptional({
     description: 'Sessions ID',
@@ -78,10 +81,12 @@ export class FindingsList extends PaginationDto {
 
   @ApiPropertyOptional({
     description: 'ID Status',
+    isArray: true,
   })
-  @IsUUID()
+  @Transform((e) => (Array.isArray(e.value) ? e.value : [e.value]))
+  @IsUUID('4', { each: true })
   @IsOptional()
-  idStatus: string;
+  idStatus: string[];
 }
 
 export class UpdateFindings extends CreateFindings {
